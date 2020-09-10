@@ -22,7 +22,7 @@ function loginUser(username, password, callback) {
     onCompleted: (response, errors) => {
       console.log("Got A Response.");
       console.log(response);
-      const id = response.createUser.id;
+      const id = response.createUser._id;
       const username = response.createUser.username;
       callback(id, username);
     },

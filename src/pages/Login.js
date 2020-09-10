@@ -11,12 +11,12 @@ const Login = (props) => {
   }
   function loginOrSignup() {
     if (login) {
-      loginUser(username, password, (id, username) => {
-        saveData(id, username);
+      loginUser(username, password, (_id, username) => {
+        saveData(_id, username);
       });
     } else {
-      registerUser(username, password, (id, username) => {
-        saveData(id, username);
+      registerUser(username, password, (_id, username) => {
+        saveData(_id, username);
       });
     }
   }
