@@ -17,13 +17,21 @@ const Login = (props) => {
   function loginOrSignup() {
     if (login) {
       loginUser(username, password, (_id, username) => {
-        saveData(_id, username);
-        history.push(`/`);
+        if (_id) {
+          saveData(_id, username);
+          history.push(`/`);
+        } else {
+          alert("Username or Password is Incorrect");
+        }
       });
     } else {
       registerUser(username, password, (_id, username) => {
-        saveData(_id, username);
-        history.push(`/`);
+        if (_id) {
+          saveData(_id, username);
+          history.push(`/`);
+        } else {
+          alert("That User already Exists");
+        }
       });
     }
   }

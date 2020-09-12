@@ -2,6 +2,7 @@ import React from "react";
 import Login from "./pages/Login";
 import Header from "./components/Header";
 import Home from "./pages/Home";
+import CreateAProperty from "./pages/CreateAProperty";
 import { Switch, Route } from "react-router-dom";
 import "./App.scss";
 
@@ -12,6 +13,7 @@ const App = () => {
       <div className="currentPage">
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/create" component={CreateAProperty} />
           <Route path="/login" component={Login} />
         </Switch>
       </div>

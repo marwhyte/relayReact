@@ -2,32 +2,48 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 
 const Header = (props) => {
-  useEffect(() => {
-    async function hello() {
-      await localStorage.setItem("USER_ID", "Hello");
-    }
-    hello();
-  }, []);
-
   const history = useHistory();
-
   const [userID, setUserID] = useState(localStorage.getItem("USER_ID"));
+  useEffect(() => {
+    function checkUserID() {
+      const ourUser = localStorage.getItem("USER_ID");
+      setUserID(ourUser);
+      console.log("hi");
+    }
+    window.addEventListener("storage", checkUserID);
 
+    return () => {
+      window.removeEventListener("storage", checkUserID);
+    };
+  }, []);
   return (
     <div className="wholePage">
-      {userID ? (
-        <div className="header">
+      <div className="header">
+        <Link
+          activeClass="active"
+          to="/"
+          spy={true}
+          smooth={true}
+          offset={-70}
+          duration={500}
+          style={{ cursor: "pointer" }}
+        >
+          All Properties
+        </Link>
+        {userID && (
           <Link
             activeClass="active"
-            to="home"
+            to="create"
             spy={true}
             smooth={true}
             offset={-70}
             duration={500}
             style={{ cursor: "pointer" }}
           >
-            Home
+            Create Property
           </Link>
+        )}
+        {userID ? (
           <div
             className="logout"
             onClick={() => {
@@ -38,9 +54,7 @@ const Header = (props) => {
           >
             logout
           </div>
-        </div>
-      ) : (
-        <div className="header">
+        ) : (
           <Link
             activeClass="active"
             to="login"
@@ -52,8 +66,8 @@ const Header = (props) => {
           >
             Login
           </Link>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -22,8 +22,16 @@ function createUser(username, password, callback) {
     onCompleted: (response, errors) => {
       console.log("Got A Response.");
       console.log(response);
-      const id = response.createUser._id;
-      const username = response.createUser.username;
+      let id;
+      let username;
+      if (response.createUser) {
+        id = response.createUser._id;
+        username = response.createUser.username;
+      } else {
+        id = null;
+        username = null;
+      }
+
       callback(id, username);
     },
 
