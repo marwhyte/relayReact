@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import loginUser from "../mutations/loginMutation";
 import registerUser from "../mutations/registerMutation";
+import { useHistory } from "react-router-dom";
+
 const Login = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(false);
+
+  const history = useHistory();
+
   function saveData(userID, userUsername) {
     localStorage.setItem("USER_ID", userID);
     localStorage.setItem("USERNAME", userUsername);
@@ -13,10 +18,12 @@ const Login = (props) => {
     if (login) {
       loginUser(username, password, (_id, username) => {
         saveData(_id, username);
+        history.push(`/`);
       });
     } else {
       registerUser(username, password, (_id, username) => {
         saveData(_id, username);
+        history.push(`/`);
       });
     }
   }
