@@ -48,6 +48,7 @@ const Header = (props) => {
             className="logout"
             onClick={() => {
               localStorage.removeItem("USER_ID");
+              localStorage.removeItem("USERNAME");
               setUserID("");
               history.push(`/login`);
             }}
