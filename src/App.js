@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Login from "./pages/Login";
 import Header from "./components/Header";
 import Home from "./pages/Home";
@@ -10,6 +10,7 @@ const App = () => {
   const loginOrOut = () => {
     setLoggedIn(!loggedIn);
   };
+
   return (
     <div className="app">
       <Header loggedIn={loggedIn} changeUser={loginOrOut} />
