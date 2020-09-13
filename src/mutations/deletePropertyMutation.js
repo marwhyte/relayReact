@@ -23,9 +23,10 @@ function deleteProperty(_id, userID, callback) {
     },
     updater: (store) => {
       const root = store.getRoot();
+      console.log(store);
       const getAllProperties = root.getLinkedRecords("getAllProperties");
       const newGetAllProperties = getAllProperties.filter(
-        (v) => v.getValue("_id") !== _id
+        (property) => property.getValue("_id") !== _id
       );
 
       root.setLinkedRecords(newGetAllProperties, "getAllProperties");
