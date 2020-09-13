@@ -9,7 +9,8 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 export type deletePropertyMutationVariables = {|
-  _id?: ?string
+  _id?: ?string,
+  userID?: ?string,
 |};
 export type deletePropertyMutationResponse = {|
   +deleteProperty: ?boolean
@@ -24,8 +25,9 @@ export type deletePropertyMutation = {|
 /*
 mutation deletePropertyMutation(
   $_id: ID
+  $userID: String
 ) {
-  deleteProperty(_id: $_id)
+  deleteProperty(_id: $_id, userID: $userID)
 }
 */
 
@@ -35,6 +37,11 @@ var v0 = [
     "defaultValue": null,
     "kind": "LocalArgument",
     "name": "_id"
+  },
+  {
+    "defaultValue": null,
+    "kind": "LocalArgument",
+    "name": "userID"
   }
 ],
 v1 = [
@@ -45,6 +52,11 @@ v1 = [
         "kind": "Variable",
         "name": "_id",
         "variableName": "_id"
+      },
+      {
+        "kind": "Variable",
+        "name": "userID",
+        "variableName": "userID"
       }
     ],
     "kind": "ScalarField",
@@ -70,16 +82,16 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "ae923565fe76b8fa0a79d9dab7b4ada7",
+    "cacheID": "e1812b80d34424020033712289783039",
     "id": null,
     "metadata": {},
     "name": "deletePropertyMutation",
     "operationKind": "mutation",
-    "text": "mutation deletePropertyMutation(\n  $_id: ID\n) {\n  deleteProperty(_id: $_id)\n}\n"
+    "text": "mutation deletePropertyMutation(\n  $_id: ID\n  $userID: String\n) {\n  deleteProperty(_id: $_id, userID: $userID)\n}\n"
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ea3ef5af75e21ec3fb2e19da7d0efa85';
+(node/*: any*/).hash = 'a5f7d37f8eafc0b275f4b035b5237332';
 
 module.exports = node;

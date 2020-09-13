@@ -1,14 +1,15 @@
 import { commitMutation, graphql } from "react-relay";
 import environment from "../environment";
 const mutation = graphql`
-  mutation deletePropertyMutation($_id: ID) {
-    deleteProperty(_id: $_id)
+  mutation deletePropertyMutation($_id: ID, $userID: String) {
+    deleteProperty(_id: $_id, userID: $userID)
   }
 `;
 
-function deleteProperty(_id, callback) {
+function deleteProperty(_id, userID, callback) {
   const variables = {
     _id,
+    userID,
   };
 
   commitMutation(environment, {
@@ -17,8 +18,8 @@ function deleteProperty(_id, callback) {
     onCompleted: (response, errors) => {
       console.log("Got A Response.");
       console.log(response);
-      const id = response.deleteProperty._id;
-      callback();
+      const didDelete = response.deleteProperty;
+      callback(didDelete);
     },
     onError: (err) => console.error(err),
   });
