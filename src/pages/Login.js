@@ -21,6 +21,7 @@ const Login = (props) => {
       loginUser(username, password, (_id, username) => {
         if (_id) {
           saveData(_id, username);
+          props.changeUser();
           history.push(`/`);
         } else {
           alert("Username or Password is Incorrect");
@@ -30,6 +31,7 @@ const Login = (props) => {
       registerUser(username, password, (_id, username) => {
         if (_id) {
           saveData(_id, username);
+          props.changeUser();
           history.push(`/`);
         } else {
           alert("That User already Exists");

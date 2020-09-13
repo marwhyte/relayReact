@@ -3,19 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 
 const Header = (props) => {
   const history = useHistory();
-  const [userID, setUserID] = useState(localStorage.getItem("USER_ID"));
-  useEffect(() => {
-    function checkUserID() {
-      const ourUser = localStorage.getItem("USER_ID");
-      setUserID(ourUser);
-      console.log("hi");
-    }
-    window.addEventListener("storage", checkUserID);
 
-    return () => {
-      window.removeEventListener("storage", checkUserID);
-    };
-  }, []);
   return (
     <div className="wholePage">
       <div className="header">
@@ -30,7 +18,7 @@ const Header = (props) => {
         >
           All Properties
         </Link>
-        {userID && (
+        {props.loggedIn && (
           <Link
             activeClass="active"
             to="create"
@@ -43,13 +31,13 @@ const Header = (props) => {
             Create Property
           </Link>
         )}
-        {userID ? (
+        {props.loggedIn ? (
           <div
             className="logout"
             onClick={() => {
               localStorage.removeItem("USER_ID");
               localStorage.removeItem("USERNAME");
-              setUserID("");
+              props.changeUser();
               history.push(`/login`);
             }}
           >
