@@ -21,6 +21,15 @@ function deleteProperty(_id, userID, callback) {
       const didDelete = response.deleteProperty;
       callback(didDelete);
     },
+    updater: (store) => {
+      const root = store.getRoot();
+      const getAllProperties = root.getLinkedRecords("getAllProperties");
+      const newGetAllProperties = getAllProperties.filter(
+        (v) => v.getValue("_id") !== _id
+      );
+
+      root.setLinkedRecords(newGetAllProperties, "getAllProperties");
+    },
     onError: (err) => console.error(err),
   });
 }
